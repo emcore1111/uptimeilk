@@ -1,10 +1,10 @@
-require("express")().listen(1343); //Wenzy
+require("express")().listen(1343); 
 
 const db = require("quick.db");
 const discord = require("discord.js");
 const client = new discord.Client({ disableEveryone: true });
 client.login("BOT TOKEN");
-const fetch = require("node-fetch");//Wenzy
+const fetch = require("node-fetch");
 const fs = require('fs')
 
 //Uptime 
@@ -15,7 +15,7 @@ const express = require('express');
 const app = express();
 const http = require('http');
     app.get("/", (request, response) => {
-    console.log(` az önce pinglenmedi. Sonra ponglanmadı... ya da başka bir şeyler olmadı.`);//Wenzy
+    console.log(` az önce pinglenmedi. Sonra ponglanmadı... ya da başka bir şeyler olmadı.`);
     response.sendStatus(200);
     });
     app.listen(process.env.PORT);
@@ -30,7 +30,7 @@ client.on("ready", () => {
     //It will count all voice channels in which bot is connected, if none it will return 0
     let playing = client.voice.connections.size; 
     //It will set the bot status to streaming
-    client.user.setPresence({ activity: { name: `discordunuzu yazın`, type: "STREAMING", url: "discordunuzu yazın" } })//Wenzy
+    client.user.setPresence({ activity: { name: `discordunuzu yazın`, type: "STREAMING", url: "discordunuzu yazın" } })
 
 });
 
@@ -50,14 +50,14 @@ setInterval(() => {
 }, 60000)
 
 client.on("ready", () => {
-if(!Array.isArray(db.get("linkler"))) {//Wenzy
+if(!Array.isArray(db.get("linkler"))) {
 db.set("linkler", [])
 }
 })
 
 client.on("message", message => {
   if(message.author.bot) return;
-  var spl = message.content.split(" ");//Wenzy
+  var spl = message.content.split(" ");
   if(spl[0] == "-ekle") {
   var link = spl[1]
   fetch(link).then(() => {
@@ -65,7 +65,7 @@ client.on("message", message => {
     message.channel.send("Botunuz Sistemimize Başarıyla Eklendi.");
     db.push("linkler", { url: link, owner: message.author.id})
   }).catch(e => {
-    return message.channel.send("Lütfen Bir Link Giriniz ")//Wenzy
+    return message.channel.send("Lütfen Bir Link Giriniz ")
   })
   }
 })
@@ -96,7 +96,7 @@ client.on("message", async message => {
           text = text
               .replace(/`/g, '`' + String.fromCharCode(8203))
               .replace(/@/g, '@' + String.fromCharCode(8203))
-          return text; //Wenzy
+          return text; 
       };
   
       var evalEmbed = ""
@@ -112,7 +112,7 @@ client.on("message", async message => {
   message.channel.send(hast)
   }
       } catch (err) {
-          message.channel.send(`\`\`\`js\n${err}\n\`\`\``); //Wenzy
+          message.channel.send(`\`\`\`js\n${err}\n\`\`\``); 
       }
   })
   
